@@ -1,0 +1,2965 @@
+type: spec.insomnia.rest/5.0
+schema_version: "5.1"
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1790004890196
+  modified: 1790004890196
+  description: ""
+collection:
+  - name: Auth
+    meta:
+      id: fld_0ab4bb21ad124243a301b42a128b7391
+      created: 1791401960243
+      modified: 1791401960243
+      sortKey: 1791401960243
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/auth/recuperar-password"
+        name: Solicitar recuperación de contraseña
+        meta:
+          id: req_1411007e6e1545ca92f915dcb9552fd6
+          created: 1791401960243
+          modified: 1791757359904
+          isPrivate: false
+          description: Envía instrucciones al correo si los datos coinciden. Siempre
+            responde 200 por seguridad.
+          sortKey: 1791401960247
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombreUsuario": "carlos_torres",
+              "correo": "tucorreo@ejemplo.comm"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/auth/logout"
+        name: Cerrar sesión
+        meta:
+          id: req_8b9d408d759446898861a64d387f344e
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde al botón "Cerrar sesión" en la pantalla Más. Invalida
+            el token actual.
+          sortKey: 1791401960246
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/auth/login"
+        name: Iniciar sesión
+        meta:
+          id: req_8c039e0f46e34cb18379f25a9363236e
+          created: 1791401960243
+          modified: 1791759185171
+          isPrivate: false
+          description: Corresponde a la pantalla "Inicio Sesión" de Figma.
+          sortKey: 1791401960245
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "correo": "demo2@ejemplo.com",
+              "password": "demo4567"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/auth/restablecer-password"
+        name: Restablecer la contraseña usando el enlace recibido por correo
+        meta:
+          id: req_d34b1699d7f044d8a8436ad68c022c92
+          created: 1791401960243
+          modified: 1791757380089
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960248
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfYjI1Y2MyOWQtMjIzMC00OGNhLWJhNDEtMTExNDZmZDZiNjViIiwibm9tYnJlVXN1YXJpbyI6ImNhcmxvc190b3JyZXMiLCJpYXQiOjE3OTE3NTczMTYsImV4cCI6MTc5MjM2MjExNn0.REsxtXHT9yFzdkqf0R1aJR4p97lFS3a5x4I6_zu8DEo",
+              "nuevaPassword": "Mypassword"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/auth/registro"
+        name: Registrar un nuevo usuario
+        meta:
+          id: req_e63403ee127b4432a07e9071e70d1d69
+          created: 1791401960243
+          modified: 1791848899744
+          isPrivate: false
+          description: Corresponde a las pantallas "Registro" (paso 1) y "Registro 2"
+            (paso 2) de Figma, enviadas juntas en una sola petición.
+          sortKey: 1791401960244
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombreUsuario": "demo2",
+              "correo": "demo2@ejemplo.com",
+              "password": "contraseñad2",
+              "edad": 30,
+              "deportesFavoritos": [
+                "Vóleibol",
+                "Running"
+              ],
+              "aceptaTerminos": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Chats
+    meta:
+      id: fld_7942444ccdd34d47a17a4a1d91ed419e
+      created: 1791401960243
+      modified: 1791401960243
+      sortKey: 1791401960248
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/chats"
+        name: Listar mis chats
+        meta:
+          id: req_290e5a03f9ce4a44921e9ca558ec52b9
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Se crea un chat automáticamente al generarse un match o al aceptar
+            unirte a un partido personal.
+          sortKey: 1791401960266
+        method: GET
+        parameters:
+          - name: deporte
+            value: Fútbol
+            description: Filtra por las pestañas Todos/Fútbol/Básquet/Tenis, etc.
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/chats/:chatId/mensajes"
+        name: Obtener el historial de mensajes de un chat
+        meta:
+          id: req_685e1fc5d3a146babe7303b7fa234521
+          created: 1791401960243
+          modified: 1791847945539
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960267
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: chatId
+            value: chat_70d62e2a-7bee-4eb6-8efd-4a983be66eff
+      - url: "{{ _.base_url }}/chats/:chatId/mensajes/:mensajeId/responder"
+        name: Responder a una propuesta de evento recibida por chat
+        meta:
+          id: req_d295908dbbca4e088c9d5c9831820349
+          created: 1791401960243
+          modified: 1791849248582
+          isPrivate: false
+          description: 'Botones "Sí quiero"/"No, gracias". Si `respuesta: aceptar`,
+            internamente llama a `POST /eventos/{id}/join`.'
+          sortKey: 1791401960269
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "respuesta": "aceptar"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: chatId
+            value: chat_9809aa98-5c9e-4d02-a04a-9d6472596f82
+          - name: mensajeId
+            value: msg_70a530d4-c4a9-4f8a-80c8-03c6a7c25a11
+      - url: "{{ _.base_url }}/chats/:chatId/mensajes"
+        name: Enviar un mensaje
+        meta:
+          id: req_e30e57d3d4c942b98625a1e3e44a4e69
+          created: 1791401960243
+          modified: 1791849135310
+          isPrivate: false
+          description: "`tipo: propuesta_evento` invita a un evento ya creado (requiere
+            `evento_id`); así se envían las invitaciones en MatchPlay."
+          sortKey: 1791401960268
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tipo": "propuesta_evento",
+              "texto": "Salimos a jugar voley?",
+              "eventoId": "evt_5c920678-45e8-4a18-a72b-c7f365b68c72"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: chatId
+            value: chat_9809aa98-5c9e-4d02-a04a-9d6472596f82
+  - name: Cuenta
+    meta:
+      id: fld_7de4977cc9cf4c8890f5044553aa776a
+      created: 1791401960243
+      modified: 1791401960243
+      sortKey: 1791401960249
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/me/privacidad"
+        name: Actualizar mi configuración de privacidad
+        meta:
+          id: req_0516a9abed0e4e89b425c22e371bd3b0
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960281
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "perfilVisibleEnBusqueda": true,
+              "mostrarEdad": true,
+              "mostrarUbicacionExacta": false,
+              "verificacionPerfil": "pendiente"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/preferencias-deportivas"
+        name: Obtener mis preferencias deportivas
+        meta:
+          id: req_1558070ecd6345a6b6207d8db3371874
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a "Mis deportes e intereses" (deportes favoritos,
+            nivel, radio de búsqueda).
+          sortKey: 1791401960274
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/privacidad"
+        name: Obtener mi configuración de privacidad
+        meta:
+          id: req_161acddd53344729aadbd95ab075d647
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a la pantalla "Privacidad y seguridad".
+          sortKey: 1791401960280
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/notificaciones"
+        name: Obtener mis preferencias de notificaciones
+        meta:
+          id: req_1b4e0610a2e342f99cda56cb79bd1d16
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a la pantalla "Notificaciones", con sus 3 grupos
+            (Actividad de partidos, Eventos, General).
+          sortKey: 1791401960278
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/bloqueados"
+        name: Listar usuarios bloqueados
+        meta:
+          id: req_1e575901e29d4104a469b46db7c6557a
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960282
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me"
+        name: Editar mi perfil
+        meta:
+          id: req_2c467196a94f45babbbd8d762347963b
+          created: 1791401960243
+          modified: 1791761342223
+          isPrivate: false
+          description: Corresponde a "Editar perfil". Solo se envían los campos que cambian.
+          sortKey: 1791401960271
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombreCompleto": "demostración",
+              "nombreUsuario": "demo2",
+              "edad": 28,
+              "ciudad": "cali",
+              "sobreMi": "gusto por el fútbol",
+              "fotoUrl": "string"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me"
+        name: Eliminar mi cuenta
+        meta:
+          id: req_3ad9dd8279e947b0b11eff0d15c5b387
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a "Eliminar mi cuenta" en Privacidad. Acción
+            irreversible.
+          sortKey: 1791401960272
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me"
+        name: Obtener mi perfil
+        meta:
+          id: req_3e43a11907b8469fa373073e86a2933b
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a "Tu perfil", con estadísticas (partidos jugados,
+            calificación, deportes favoritos).
+          sortKey: 1791401960270
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/horario-disponible"
+        name: Obtener mi horario disponible
+        meta:
+          id: req_4ae3d4bce7a94c4ead015606b72d3061
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a la pantalla "Horario disponible".
+          sortKey: 1791401960276
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/bloqueados"
+        name: Bloquear a un usuario
+        meta:
+          id: req_6e1d4670417b403c859d2acc0fcca551
+          created: 1791401960243
+          modified: 1791761547214
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960283
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "perfilId": "usr_881fca85-1e0f-44f5-8b55-c43ccbb21f63"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/bloqueados/:perfilId"
+        name: Desbloquear a un usuario
+        meta:
+          id: req_8198785fbd584a548026b563daf74331
+          created: 1791401960243
+          modified: 1791761562111
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960284
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: perfilId
+            value: usr_881fca85-1e0f-44f5-8b55-c43ccbb21f63
+      - url: "{{ _.base_url }}/me/datos"
+        name: Descargar mis datos
+        meta:
+          id: req_8da9a04727d847bd969fb8a427d35e03
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a "Descargar mis datos" en Privacidad.
+          sortKey: 1791401960273
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/idioma"
+        name: Cambiar el idioma de la aplicación
+        meta:
+          id: req_96ce406a238942a380f16415321867c7
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a la pantalla "Idioma".
+          sortKey: 1791401960285
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "idioma": "es"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/tema"
+        name: Cambiar el tema visual de la aplicación
+        meta:
+          id: req_a9a64e79697549218191fc2ef36d1e6f
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Corresponde a la pantalla "Cambiar tema".
+          sortKey: 1791401960286
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tema": "oscuro"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/horario-disponible"
+        name: Actualizar mi horario disponible
+        meta:
+          id: req_b5a662ffe54648b7a41ef56376f3891e
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960277
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dias": [
+                "Martes",
+                "Jueves",
+                "Sábado"
+              ],
+              "franjaHoraria": "Mañana",
+              "notas": "Solo disponible después de las 6pm entre semana, fines de semana todo el día."
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/notificaciones"
+        name: Actualizar mis preferencias de notificaciones
+        meta:
+          id: req_c4e7580a3b5a4cadb48ae436b69ff6aa
+          created: 1791401960243
+          modified: 1791761411501
+          isPrivate: false
+          description: Se aplica de inmediato (sin botón "Guardar"), como en el prototipo.
+          sortKey: 1791401960279
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nuevasSolicitudes": true,
+              "mensajesNuevos": true,
+              "recordatorioPartido": true,
+              "nuevosEventosCerca": true,
+              "cuposCasiLlenos": false,
+              "cambiosEnEventos": true,
+              "novedadesYPromociones": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me/preferencias-deportivas"
+        name: Actualizar mis preferencias deportivas
+        meta:
+          id: req_f5cbd6f6a9284c3d955452920ad1a592
+          created: 1791401960243
+          modified: 1791761372387
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960275
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "deportesFavoritos": [
+                "Fútbol 5",
+                "Básquet 3x3",
+                "Tenis"
+              ],
+              "nivel": "Principiante",
+              "radioBusquedaKm": 10
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Deportes
+    meta:
+      id: fld_8645553a25e04345874df080949911f5
+      created: 1791401960243
+      modified: 1791401960243
+      sortKey: 1791401960246
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/deportes"
+        name: Catálogo de deportes con disponibilidad
+        meta:
+          id: req_bce7badb3a294892bcb796164d53879b
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: Pantalla "Explorar". También alimenta los selectores de deporte en
+            registro, preferencias y creación de eventos.
+          sortKey: 1791401960255
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/deportes"
+        name: Crear un deporte
+        meta:
+          id: req_80bec2d092d4405d8afa5f51b5c9cd20
+          created: 1791725850521
+          modified: 1791725850521
+          isPrivate: false
+          description: Agrega un deporte nuevo al catálogo. Persistido en MongoDB
+            (colección deportes). Requiere sesión.
+          sortKey: 1791401960258
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombre": "Escalada",
+              "iconoUrl": "https://ejemplo.com/iconos/escalada.png",
+              "disponibles": 15
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/deportes/{{ _.deporte_id }}"
+        name: Actualizar un deporte
+        meta:
+          id: req_9a51bf7977bd4086b57981b472db3e5e
+          created: 1791725850521
+          modified: 1791759693071
+          isPrivate: false
+          description: Edita campos de un deporte existente (parcial). Persistido en
+            MongoDB. Requiere sesión.
+          sortKey: 1791401960259
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "disponibles": 17
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/deportes/{{ _.deporte_id }}"
+        name: Obtener un deporte por id
+        meta:
+          id: req_9c4c1d166dde40ba83f71e3186a8ec65
+          created: 1791725850521
+          modified: 1791759379972
+          isPrivate: false
+          description: Detalle de un deporte del catálogo (único recurso persistido en
+            MongoDB).
+          sortKey: 1791401960257
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/deportes/{{ _.deporte_id }}"
+        name: Eliminar un deporte
+        meta:
+          id: req_cb72e36d4243441d99b289ad3a58f239
+          created: 1791725850521
+          modified: 1791725850521
+          isPrivate: false
+          description: Borra un deporte del catálogo. Persistido en MongoDB. Requiere
+            sesión. Responde 204.
+          sortKey: 1791401960260
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Matches
+    meta:
+      id: fld_970764d653c54cdfa175717e16de6df3
+      created: 1791401960243
+      modified: 1791401960243
+      sortKey: 1791401960245
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/matches/:matchId"
+        name: Deshacer un match
+        meta:
+          id: req_07a1b940450345d68cbc5f4395ad0d55
+          created: 1791401960243
+          modified: 1791846986418
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960254
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: matchId
+            value: match_6836e4b7-c426-498b-8b3b-f4d4bcf0d5b4
+      - url: "{{ _.base_url }}/matches"
+        name: Listar mis matches (like mutuo desde el swipe)
+        meta:
+          id: req_9e37542852114fe2b13dcb9e86553d6b
+          created: 1791401960243
+          modified: 1791758952954
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960253
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+          prefix: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Perfiles
+    meta:
+      id: fld_bf5ea97cc8c144b19db5b8af8597e0bb
+      created: 1791401960243
+      modified: 1791401960243
+      sortKey: 1791401960244
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/perfiles/:perfilId"
+        name: Obtener el detalle público de un perfil
+        meta:
+          id: req_012cf9b017cc422db7dde2c2d4cdfbda
+          created: 1791401960243
+          modified: 1791848947474
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960250
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: perfilId
+            value: usr_f78f8580-3a5a-4d30-bb5a-bf86121c009c
+      - url: "{{ _.base_url }}/perfiles/:perfilId/pass"
+        name: Descartar un perfil
+        meta:
+          id: req_126dbb96386c4c9996af9d3830f01a7e
+          created: 1791401960243
+          modified: 1791846847661
+          isPrivate: false
+          description: Botón ✕ de la tarjeta de swipe. Este perfil no vuelve a aparecer en
+            el feed.
+          sortKey: 1791401960252
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: perfilId
+            value: usr_ca475f18-56ab-4b87-b174-f50215d795e3
+      - url: "{{ _.base_url }}/perfiles/:perfilId/like"
+        name: Dar like a un perfil
+        meta:
+          id: req_468ff7d8c33d4975bb77e160808b8c19
+          created: 1791401960243
+          modified: 1791849050119
+          isPrivate: false
+          description: Botón ❤️ de la tarjeta de swipe. Si hay like mutuo, se genera un
+            Match (dispara el modal "¡Es un match!").
+          sortKey: 1791401960251
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: perfilId
+            value: usr_d1a4b711-7a81-4f49-92b8-2d6cea0ce1ad
+      - url: "{{ _.base_url }}/perfiles/feed"
+        name: Obtener el siguiente lote de perfiles para swipe
+        meta:
+          id: req_7673e1e91d4446158b26cd6d9af2cc85
+          created: 1791401960243
+          modified: 1791846752154
+          isPrivate: false
+          description: Pantalla HOME. Filtrable por deporte, como los chips
+            "Todos/Fútbol/Básquet/Tenis".
+          sortKey: 1791401960249
+        method: GET
+        parameters:
+          - name: deporte
+            value: Fútbol 5
+            description: ""
+            disabled: true
+          - name: limite
+            value: "10"
+            description: ""
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Eventos
+    meta:
+      id: fld_cc624ee39c2641fc9ec3d50524b11c0c
+      created: 1791401960243
+      modified: 1791401960243
+      sortKey: 1791401960247
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/eventos/:eventoId/join"
+        name: Unirme a un evento (autoservicio)
+        meta:
+          id: req_0914e1ed437a4facb96c43f20416337b
+          created: 1791401960243
+          modified: 1791847559637
+          isPrivate: false
+          description: Reserva un cupo. Usado tanto por "Unirme" como por "Sí quiero" en
+            una propuesta de chat.
+          sortKey: 1791401960263
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: eventoId
+            value: evt_12d33a6e-5061-42cd-8173-a4ce36de77a7
+      - url: "{{ _.base_url }}/eventos/:eventoId/cancelar"
+        name: Cancelar un evento (solo el creador)
+        meta:
+          id: req_34bf793404ca4d4687f7218c922763e6
+          created: 1791401960243
+          modified: 1791847806939
+          isPrivate: false
+          description: Corresponde al flujo "Cancelar evento". Notifica a todos los
+            inscritos.
+          sortKey: 1791401960262
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "motivo": "Lluvia, se reprograma para otro día"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: eventoId
+            value: evt_12d33a6e-5061-42cd-8173-a4ce36de77a7
+      - url: "{{ _.base_url }}/eventos/:eventoId/publicar"
+        name: Publicar un evento
+        meta:
+          id: req_3abfae829f7d4a1b8468a2ab64bd4e36
+          created: 1791401960243
+          modified: 1791849122643
+          isPrivate: false
+          description: Cambia el evento de `borrador` a `publicado` y lo hace
+            visible/unible por otros usuarios.
+          sortKey: 1791401960261
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: eventoId
+            value: evt_5c920678-45e8-4a18-a72b-c7f365b68c72
+      - url: "{{ _.base_url }}/eventos/:eventoId/participantes"
+        name: Listar los participantes inscritos en un evento
+        meta:
+          id: req_48230972479f450792b79bd9744a3d17
+          created: 1791401960243
+          modified: 1791847650678
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960265
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: eventoId
+            value: evt_12d33a6e-5061-42cd-8173-a4ce36de77a7
+      - url: "{{ _.base_url }}/eventos/:eventoId"
+        name: Editar un evento existente (solo el creador, y solo si no está cancelado)
+        meta:
+          id: req_519ae6ed4ae548e09e6dab1edd7bd113
+          created: 1791401960243
+          modified: 1791847403849
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960260
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tipo": "comunidad",
+              "titulo": "Sesión de voley",
+              "deporte": "Vóleibol",
+              "fechaHora": "2026-12-15T18:00:00.000Z",
+              "lugar": "Coliseo Municipal",
+              "cupoMaximo": 15,
+              "nivelRequerido": "Cualquiera",
+              "descripcion": "juguemos voley en la playa"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: eventoId
+            value: evt_12d33a6e-5061-42cd-8173-a4ce36de77a7
+      - url: "{{ _.base_url }}/eventos/:eventoId"
+        name: Obtener el detalle de un evento
+        meta:
+          id: req_71e5cddafa77404f928e8862f1119156
+          created: 1791401960243
+          modified: 1791847252533
+          isPrivate: false
+          description: Corresponde tanto a "Detalle Fútbol/Tenis/Básquet/..." (personal)
+            como al detalle de un evento comunitario.
+          sortKey: 1791401960259
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: eventoId
+            value: evt_12d33a6e-5061-42cd-8173-a4ce36de77a7
+      - url: "{{ _.base_url }}/eventos/mios"
+        name: Mis eventos, como organizador o como participante
+        meta:
+          id: req_940fd830736142b0904a74f9260e1fd0
+          created: 1791401960243
+          modified: 1791759892403
+          isPrivate: false
+          description: Usado por "Mis partidos" (rol=participante) y "Eventos que
+            organicé" (rol=organizador).
+          sortKey: 1791401960258
+        method: GET
+        parameters:
+          - name: rol
+            value: organizador
+            description: ""
+            disabled: false
+          - name: estado
+            value: publicado
+            description: ""
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/eventos"
+        name: Listar eventos
+        meta:
+          id: req_bb5c71af15ec46908d6cd20d8171922b
+          created: 1791401960243
+          modified: 1791401960243
+          isPrivate: false
+          description: >
+            `tipo=personal` alimenta la pestaña "Solicitudes" (feed de partidos
+            que coinciden con tus preferencias); `tipo=comunidad` alimenta la
+            pestaña "Eventos" (listado público).
+          sortKey: 1791401960256
+        method: GET
+        parameters:
+          - name: tipo
+            value: personal
+            description: ""
+            disabled: true
+          - name: deporte
+            value: Pádel
+            description: ""
+            disabled: true
+          - name: estado
+            value: publicado
+            description: ""
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/eventos"
+        name: Crear un evento (personal o comunitario)
+        meta:
+          id: req_c3967fe08d6144a4bf4cdea1c1019319
+          created: 1791401960243
+          modified: 1791846227260
+          isPrivate: false
+          description: >
+            Corresponde tanto al flujo "Crear evento" (tipo=comunidad) como a
+            publicar un partido personal en Solicitudes (tipo=personal). Se crea
+            en estado `borrador`.
+          sortKey: 1791401960257
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tipo": "comunidad",
+              "titulo": "Sesión de voley",
+              "deporte": "Vóleibol",
+              "fechaHora": "2026-12-15T18:00:00.000Z",
+              "lugar": "Coliseo Municipal",
+              "cupoMaximo": 15,
+              "nivelRequerido": "Cualquiera",
+              "descripcion": "string"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/eventos/:eventoId/join"
+        name: Cancelar mi participación en un evento
+        meta:
+          id: req_d5dc8744cead40379f004f8a476509dd
+          created: 1791401960243
+          modified: 1791847611125
+          isPrivate: false
+          description: ""
+          sortKey: 1791401960264
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _.token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: eventoId
+            value: evt_12d33a6e-5061-42cd-8173-a4ce36de77a7
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1791210148185
+    modified: 1791210148185
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1791210148181
+    modified: 1791210148181
+    isPrivate: false
+  subEnvironments:
+    - name: Local (localhost:3000)
+      meta:
+        id: env_f1167ad7809e4350b3c50f1c407c59ba
+        created: 1791401960243
+        modified: 1791849363767
+        isPrivate: false
+        sortKey: 1791401960243
+      data:
+        base_url: http://localhost:3000/api
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfZjc4Zjg1ODAtM2E1YS00ZDMwLWJiNWEtYmY4NjEyMWMwMDljIiwibm9tYnJlVXN1YXJpbyI6ImRlbW8yIiwiaWF0IjoxNzkxODQ4ODg1LCJleHAiOjE3OTI0NTM2ODV9._ESxduvbyyUIlfpRTLQmeVEfX0px7fuLkxOkdwxnjKU
+        perfil_id: ""
+        match_id: ""
+        evento_id: ""
+      color: "#7d69cb"
+spec:
+  contents:
+    _type: export
+    __export_format: 4
+    __export_date: 2026-10-07T00:00:00.000Z
+    __export_source: insomnia.desktop.app:v8.0.0
+    resources:
+      - _id: wrk_00011791401960243
+        _type: workspace
+        modified: 1791401960243
+        created: 1791401960243
+        name: MatchPlay API
+        description: >
+          API para MatchPlay, una app de matchmaking deportivo para encontrar
+          compañeros y partidos de fútbol, básquet, tenis, ciclismo, pádel y
+          vóleibol.
+        scope: collection
+      - _id: env_00021791401960243
+        _type: environment
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Base Environment
+        isPrivate: false
+        metaSortKey: 1791401960243
+      - _id: env_00031791401960243
+        _type: environment
+        parentId: env_00021791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Local (localhost:3000)
+        data:
+          base_url: http://localhost:3000/api
+          token: ""
+          deporte_id: PON_AQUI_EL_ID_DE_UN_DEPORTE
+        dataPropertyOrder:
+          "&":
+            - base_url
+            - token
+        color: "#7d69cb"
+        isPrivate: false
+        metaSortKey: 1791401960243
+      - _id: fld_00041791401960243
+        _type: request_group
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Auth
+        description: ""
+        metaSortKey: 1791401960243
+      - _id: fld_00051791401960243
+        _type: request_group
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Perfiles
+        description: ""
+        metaSortKey: 1791401960244
+      - _id: fld_00061791401960243
+        _type: request_group
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Matches
+        description: ""
+        metaSortKey: 1791401960245
+      - _id: fld_00071791401960243
+        _type: request_group
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Deportes
+        description: ""
+        metaSortKey: 1791401960246
+      - _id: fld_00081791401960243
+        _type: request_group
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Eventos
+        description: ""
+        metaSortKey: 1791401960247
+      - _id: fld_00091791401960243
+        _type: request_group
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Chats
+        description: ""
+        metaSortKey: 1791401960248
+      - _id: fld_00101791401960243
+        _type: request_group
+        parentId: wrk_00011791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        name: Cuenta
+        description: ""
+        metaSortKey: 1791401960249
+      - _id: req_00111791401960243
+        _type: request
+        parentId: fld_00041791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/auth/registro"
+        name: Registrar un nuevo usuario
+        description: Corresponde a las pantallas "Registro" (paso 1) y "Registro 2"
+          (paso 2) de Figma, enviadas juntas en una sola petición.
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombreUsuario": "camilo_torres",
+              "correo": "tucorreo@ejemplo.com",
+              "password": "string",
+              "edad": 23,
+              "deportesFavoritos": [
+                "Fútbol 5",
+                "Vóleibol",
+                "Running"
+              ],
+              "aceptaTerminos": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        metaSortKey: 1791401960244
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00121791401960243
+        _type: request
+        parentId: fld_00041791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/auth/login"
+        name: Iniciar sesión
+        description: Corresponde a la pantalla "Inicio Sesión" de Figma.
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "correo": "correo@ejemplo.com",
+              "password": "string"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        metaSortKey: 1791401960245
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00131791401960243
+        _type: request
+        parentId: fld_00041791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/auth/logout"
+        name: Cerrar sesión
+        description: Corresponde al botón "Cerrar sesión" en la pantalla Más. Invalida
+          el token actual.
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960246
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00141791401960243
+        _type: request
+        parentId: fld_00041791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/auth/recuperar-password"
+        name: Solicitar recuperación de contraseña
+        description: Envía instrucciones al correo si los datos coinciden. Siempre
+          responde 200 por seguridad.
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombreUsuario": "camilo_torres",
+              "correo": "tucorreo@ejemplo.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        metaSortKey: 1791401960247
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00151791401960243
+        _type: request
+        parentId: fld_00041791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/auth/restablecer-password"
+        name: Restablecer la contraseña usando el enlace recibido por correo
+        description: ""
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "token": "string",
+              "nuevaPassword": "string"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        metaSortKey: 1791401960248
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00161791401960243
+        _type: request
+        parentId: fld_00051791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/perfiles/feed"
+        name: Obtener el siguiente lote de perfiles para swipe
+        description: Pantalla HOME. Filtrable por deporte, como los chips
+          "Todos/Fútbol/Básquet/Tenis".
+        method: GET
+        parameters:
+          - name: deporte
+            value: Fútbol 5
+            description: ""
+            disabled: true
+          - name: limite
+            value: "10"
+            description: ""
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960249
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00171791401960243
+        _type: request
+        parentId: fld_00051791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/perfiles/:perfilId"
+        name: Obtener el detalle público de un perfil
+        description: ""
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960250
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00181791401960243
+        _type: request
+        parentId: fld_00051791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/perfiles/:perfilId/like"
+        name: Dar like a un perfil
+        description: Botón ❤️ de la tarjeta de swipe. Si hay like mutuo, se genera un
+          Match (dispara el modal "¡Es un match!").
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960251
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00191791401960243
+        _type: request
+        parentId: fld_00051791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/perfiles/:perfilId/pass"
+        name: Descartar un perfil
+        description: Botón ✕ de la tarjeta de swipe. Este perfil no vuelve a aparecer en
+          el feed.
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960252
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00201791401960243
+        _type: request
+        parentId: fld_00061791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/matches"
+        name: Listar mis matches (like mutuo desde el swipe)
+        description: ""
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960253
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00211791401960243
+        _type: request
+        parentId: fld_00061791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/matches/:matchId"
+        name: Deshacer un match
+        description: ""
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960254
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00221791401960243
+        _type: request
+        parentId: fld_00071791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/deportes"
+        name: Catálogo de deportes con disponibilidad
+        description: Pantalla "Explorar". También alimenta los selectores de deporte en
+          registro, preferencias y creación de eventos.
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        metaSortKey: 1791401960255
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_dep_obtener_001
+        _type: request
+        parentId: fld_00071791401960243
+        modified: 1791725850521
+        created: 1791725850521
+        url: "{{ _.base_url }}/deportes/{{ _.deporte_id }}"
+        name: Obtener un deporte por id
+        description: Detalle de un deporte del catálogo (único recurso persistido en
+          MongoDB).
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        metaSortKey: 1791401960257
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_dep_crear_001
+        _type: request
+        parentId: fld_00071791401960243
+        modified: 1791725850521
+        created: 1791725850521
+        url: "{{ _.base_url }}/deportes"
+        name: Crear un deporte
+        description: Agrega un deporte nuevo al catálogo. Persistido en MongoDB
+          (colección deportes). Requiere sesión.
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombre": "Escalada",
+              "iconoUrl": "https://ejemplo.com/iconos/escalada.png",
+              "disponibles": 15
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960258
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_dep_actualizar_001
+        _type: request
+        parentId: fld_00071791401960243
+        modified: 1791725850521
+        created: 1791725850521
+        url: "{{ _.base_url }}/deportes/{{ _.deporte_id }}"
+        name: Actualizar un deporte
+        description: Edita campos de un deporte existente (parcial). Persistido en
+          MongoDB. Requiere sesión.
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "disponibles": 20
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960259
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_dep_eliminar_001
+        _type: request
+        parentId: fld_00071791401960243
+        modified: 1791725850521
+        created: 1791725850521
+        url: "{{ _.base_url }}/deportes/{{ _.deporte_id }}"
+        name: Eliminar un deporte
+        description: Borra un deporte del catálogo. Persistido en MongoDB. Requiere
+          sesión. Responde 204.
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960260
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00231791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos"
+        name: Listar eventos
+        description: >
+          `tipo=personal` alimenta la pestaña "Solicitudes" (feed de partidos
+          que coinciden con tus preferencias); `tipo=comunidad` alimenta la
+          pestaña "Eventos" (listado público).
+        method: GET
+        parameters:
+          - name: tipo
+            value: personal
+            description: ""
+            disabled: true
+          - name: deporte
+            value: Pádel
+            description: ""
+            disabled: true
+          - name: estado
+            value: publicado
+            description: ""
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960256
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00241791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos"
+        name: Crear un evento (personal o comunitario)
+        description: >
+          Corresponde tanto al flujo "Crear evento" (tipo=comunidad) como a
+          publicar un partido personal en Solicitudes (tipo=personal). Se crea
+          en estado `borrador`.
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tipo": "personal",
+              "titulo": "Pichanga de fútbol 5",
+              "deporte": "Fútbol 5",
+              "fechaHora": "2026-01-01T12:00:00Z",
+              "lugar": "Coliseo Municipal",
+              "cupoMaximo": 10,
+              "nivelRequerido": "Cualquiera",
+              "descripcion": "string"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960257
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00251791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/mios"
+        name: Mis eventos, como organizador o como participante
+        description: Usado por "Mis partidos" (rol=participante) y "Eventos que
+          organicé" (rol=organizador).
+        method: GET
+        parameters:
+          - name: rol
+            value: organizador
+            description: ""
+            disabled: false
+          - name: estado
+            value: publicado
+            description: ""
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960258
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00261791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/:eventoId"
+        name: Obtener el detalle de un evento
+        description: Corresponde tanto a "Detalle Fútbol/Tenis/Básquet/..." (personal)
+          como al detalle de un evento comunitario.
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960259
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00271791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/:eventoId"
+        name: Editar un evento existente (solo el creador, y solo si no está cancelado)
+        description: ""
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tipo": "personal",
+              "titulo": "Pichanga de fútbol 5",
+              "deporte": "Fútbol 5",
+              "fechaHora": "2026-01-01T12:00:00Z",
+              "lugar": "Coliseo Municipal",
+              "cupoMaximo": 10,
+              "nivelRequerido": "Cualquiera",
+              "descripcion": "string"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960260
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00281791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/:eventoId/publicar"
+        name: Publicar un evento
+        description: Cambia el evento de `borrador` a `publicado` y lo hace
+          visible/unible por otros usuarios.
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960261
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00291791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/:eventoId/cancelar"
+        name: Cancelar un evento (solo el creador)
+        description: Corresponde al flujo "Cancelar evento". Notifica a todos los inscritos.
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "motivo": "Lluvia, se reprograma para otro día"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960262
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00301791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/:eventoId/join"
+        name: Unirme a un evento (autoservicio)
+        description: Reserva un cupo. Usado tanto por "Unirme" como por "Sí quiero" en
+          una propuesta de chat.
+        method: POST
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960263
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00311791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/:eventoId/join"
+        name: Cancelar mi participación en un evento
+        description: ""
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960264
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00321791401960243
+        _type: request
+        parentId: fld_00081791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/eventos/:eventoId/participantes"
+        name: Listar los participantes inscritos en un evento
+        description: ""
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960265
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00331791401960243
+        _type: request
+        parentId: fld_00091791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/chats"
+        name: Listar mis chats
+        description: Se crea un chat automáticamente al generarse un match o al aceptar
+          unirte a un partido personal.
+        method: GET
+        parameters:
+          - name: deporte
+            value: Fútbol
+            description: Filtra por las pestañas Todos/Fútbol/Básquet/Tenis, etc.
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960266
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00341791401960243
+        _type: request
+        parentId: fld_00091791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/chats/:chatId/mensajes"
+        name: Obtener el historial de mensajes de un chat
+        description: ""
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960267
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00351791401960243
+        _type: request
+        parentId: fld_00091791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/chats/:chatId/mensajes"
+        name: Enviar un mensaje
+        description: "`tipo: propuesta_evento` invita a un evento ya creado (requiere
+          `evento_id`); así se envían las invitaciones en MatchPlay."
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tipo": "texto",
+              "texto": "string",
+              "eventoId": "evt_001"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960268
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00361791401960243
+        _type: request
+        parentId: fld_00091791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/chats/:chatId/mensajes/:mensajeId/responder"
+        name: Responder a una propuesta de evento recibida por chat
+        description: 'Botones "Sí quiero"/"No, gracias". Si `respuesta: aceptar`,
+          internamente llama a `POST /eventos/{id}/join`.'
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "respuesta": "aceptar"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960269
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00371791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me"
+        name: Obtener mi perfil
+        description: Corresponde a "Tu perfil", con estadísticas (partidos jugados,
+          calificación, deportes favoritos).
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960270
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00381791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me"
+        name: Editar mi perfil
+        description: Corresponde a "Editar perfil". Solo se envían los campos que cambian.
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nombreCompleto": "string",
+              "nombreUsuario": "string",
+              "edad": 1,
+              "ciudad": "string",
+              "sobreMi": "string",
+              "fotoUrl": "string"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960271
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00391791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me"
+        name: Eliminar mi cuenta
+        description: Corresponde a "Eliminar mi cuenta" en Privacidad. Acción irreversible.
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960272
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00401791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/datos"
+        name: Descargar mis datos
+        description: Corresponde a "Descargar mis datos" en Privacidad.
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960273
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00411791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/preferencias-deportivas"
+        name: Obtener mis preferencias deportivas
+        description: Corresponde a "Mis deportes e intereses" (deportes favoritos,
+          nivel, radio de búsqueda).
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960274
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00421791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/preferencias-deportivas"
+        name: Actualizar mis preferencias deportivas
+        description: ""
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "deportesFavoritos": [
+                "Fútbol 5",
+                "Básquet 3x3",
+                "Tenis"
+              ],
+              "nivel": "Principiante",
+              "radioBusquedaKm": 8
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960275
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00431791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/horario-disponible"
+        name: Obtener mi horario disponible
+        description: Corresponde a la pantalla "Horario disponible".
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960276
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00441791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/horario-disponible"
+        name: Actualizar mi horario disponible
+        description: ""
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "dias": [
+                "Martes",
+                "Jueves",
+                "Sábado"
+              ],
+              "franjaHoraria": "Mañana",
+              "notas": "Solo disponible después de las 6pm entre semana, fines de semana todo el día."
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960277
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00451791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/notificaciones"
+        name: Obtener mis preferencias de notificaciones
+        description: Corresponde a la pantalla "Notificaciones", con sus 3 grupos
+          (Actividad de partidos, Eventos, General).
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960278
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00461791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/notificaciones"
+        name: Actualizar mis preferencias de notificaciones
+        description: Se aplica de inmediato (sin botón "Guardar"), como en el prototipo.
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nuevasSolicitudes": true,
+              "mensajesNuevos": true,
+              "recordatorioPartido": true,
+              "nuevosEventosCerca": true,
+              "cuposCasiLlenos": false,
+              "cambiosEnEventos": true,
+              "novedadesYPromociones": false
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960279
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00471791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/privacidad"
+        name: Obtener mi configuración de privacidad
+        description: Corresponde a la pantalla "Privacidad y seguridad".
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960280
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00481791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/privacidad"
+        name: Actualizar mi configuración de privacidad
+        description: ""
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "perfilVisibleEnBusqueda": true,
+              "mostrarEdad": true,
+              "mostrarUbicacionExacta": false,
+              "verificacionPerfil": "pendiente"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960281
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00491791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/bloqueados"
+        name: Listar usuarios bloqueados
+        description: ""
+        method: GET
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960282
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00501791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/bloqueados"
+        name: Bloquear a un usuario
+        description: ""
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "perfilId": "usr_001"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960283
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00511791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/bloqueados/:perfilId"
+        name: Desbloquear a un usuario
+        description: ""
+        method: DELETE
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960284
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00521791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/idioma"
+        name: Cambiar el idioma de la aplicación
+        description: Corresponde a la pantalla "Idioma".
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "idioma": "es"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960285
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+      - _id: req_00531791401960243
+        _type: request
+        parentId: fld_00101791401960243
+        modified: 1791401960243
+        created: 1791401960243
+        url: "{{ _.base_url }}/me/tema"
+        name: Cambiar el tema visual de la aplicación
+        description: Corresponde a la pantalla "Cambiar tema".
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "tema": "oscuro"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.token }}"
+          disabled: false
+        metaSortKey: 1791401960286
+        isPrivate: false
+        settingStoreCookies: true
+        settingSendCookies: true
+        settingDisableRenderRequestBody: false
+        settingEncodeUrl: true
+        settingRebuildPath: true
+        settingFollowRedirects: global
+  meta:
+    id: spc_aafcd4104b194c19ac636ad4d8167114
+    created: 1791739944679
+    modified: 1791745310528

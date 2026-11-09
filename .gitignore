@@ -1,0 +1,14 @@
+# Dependencias y compilados (de las dos carpetas)
+node_modules/
+.next/
+dist/
+*.tsbuildinfo
+
+# Variables con secretos: NUNCA se suben
+.env
+.env.local
+.env.*.local
+
+# Sistema
+.DS_Store
+Thumbs.db
