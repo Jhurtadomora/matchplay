@@ -19,13 +19,16 @@ import { ActualizarDeporteDto } from './dto/actualizar-deporte.dto';
 export class DeportesService implements OnModuleInit {
   private readonly logger = new Logger(DeportesService.name);
 
+  // Los mismos 8 deportes y cantidades de la pantalla Explorar del Figma
   private readonly catalogoInicial = [
     { nombre: 'Fútbol 5', disponibles: 412 },
-    { nombre: 'Básquet 3x3', disponibles: 198 },
-    { nombre: 'Tenis', disponibles: 87 },
-    { nombre: 'Ciclismo', disponibles: 64 },
-    { nombre: 'Pádel', disponibles: 73 },
-    { nombre: 'Vóleibol', disponibles: 121 },
+    { nombre: 'Fútbol 11', disponibles: 221 },
+    { nombre: 'Baloncesto', disponibles: 198 },
+    { nombre: 'Pádel', disponibles: 176 },
+    { nombre: 'Tenis', disponibles: 132 },
+    { nombre: 'Vóleibol', disponibles: 96 },
+    { nombre: 'Natación', disponibles: 64 },
+    { nombre: 'Ciclismo', disponibles: 58 },
   ];
 
   constructor(

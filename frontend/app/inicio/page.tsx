@@ -7,6 +7,7 @@ import Sidebar from "../components/Sidebar";
 import { apiFetch, MODO_DEMO, RUTAS } from "../lib/api";
 import { jugadores as jugadoresEjemplo } from "../lib/datos";
 import { perfilAUi } from "../lib/adaptadores";
+import { mismoDeporte } from "../lib/utilidades";
 
 // Nombre de cada filtro y su ancho en el Figma
 const filtros = [
@@ -21,9 +22,26 @@ export default function InicioPage() {
   const [indice, setIndice] = useState(0);
   const [filtro, setFiltro] = useState("Todos");
   const [aviso, setAviso] = useState("");
+  const [extra, setExtra] = useState(""); // deporte que llega desde Explorar
 
   // Al abrir la página traemos los jugadores
   useEffect(() => {
+    // Si venimos de Explorar, la dirección trae el deporte: /inicio?deporte=Tenis
+    const deporte = new URLSearchParams(window.location.search).get("deporte");
+    if (deporte) {
+      const chip = filtros.find((f) => f.nombre !== "Todos" && mismoDeporte(f.nombre, deporte));
+      if (chip) {
+        setFiltro(chip.nombre);
+      } else {
+        setExtra(deporte);
+        setFiltro(deporte);
+      }
+    } else {
+      setExtra("");
+      setFiltro("Todos");
+    }
+    setIndice(0);
+
     if (MODO_DEMO) {
       setJugadores(jugadoresEjemplo);
       return;
@@ -34,7 +52,7 @@ export default function InicioPage() {
   }, []);
 
   // Solo mostramos los del deporte elegido
-  const lista = jugadores.filter((j) => filtro === "Todos" || j.deporte.startsWith(filtro));
+  const lista = jugadores.filter((j) => filtro === "Todos" || mismoDeporte(j.deporte, filtro));
   const actual = lista[indice];
 
   function cambiarFiltro(f: string) {
@@ -73,8 +91,8 @@ export default function InicioPage() {
         <p className="subtitulo">Desliza para armar tu próximo partido</p>
 
         <div className="filtros">
-          {filtros.map((f) => (
-            <button key={f.nombre} style={{ width: f.ancho }}
+          {(extra ? [...filtros, { nombre: extra, ancho: 0 }] : filtros).map((f) => (
+            <button key={f.nombre} style={{ width: f.ancho || "auto", padding: f.ancho ? 0 : "0 15px" }}
               className={filtro === f.nombre ? "filtro activo" : "filtro"} onClick={() => cambiarFiltro(f.nombre)}>
               {f.nombre}
             </button>

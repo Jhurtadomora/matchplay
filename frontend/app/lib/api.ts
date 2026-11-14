@@ -20,6 +20,11 @@ export const RUTAS = {
   eventos: "/eventos",
   eventosComunidad: "/eventos?tipo=comunidad",
   evento: "/eventos/",       // + id (+ "/join", "/publicar")
+  misEventos: "/eventos/mios",
+  recuperar: "/auth/recuperar-password",
+  deportes: "/deportes",
+  chats: "/chats",           // + id + "/mensajes"
+  yo: "/me",                 // + "/notificaciones", "/horario-disponible", "/idioma", "/tema"...
 };
 
 // Función para hablar con el backend sin repetir código en cada página
@@ -52,8 +57,16 @@ export async function apiFetch(ruta: string, metodo: string = "GET", cuerpo?: un
 }
 
 // Guarda la sesión que devuelven /auth/login y /auth/registro
-export function guardarSesion(datos: { token: string; usuario: { id: string; nombreUsuario: string } }) {
+export function guardarSesion(datos: { token: string; usuario: { id: string; nombreUsuario: string; tema?: string } }) {
   localStorage.setItem("token", datos.token);
   localStorage.setItem("usuarioId", datos.usuario.id);
   localStorage.setItem("nombre", datos.usuario.nombreUsuario);
+  if (datos.usuario.tema) localStorage.setItem("tema", datos.usuario.tema);
+}
+
+// Borra la sesión guardada en el navegador
+export function cerrarSesion() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("usuarioId");
+  localStorage.removeItem("nombre");
 }

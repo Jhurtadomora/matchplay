@@ -36,3 +36,24 @@ export function horaDeIso(iso: string) {
   const d = new Date(iso);
   return formatearHora(String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"));
 }
+
+// "Básquet 3×3" -> "basquet 3×3" (minúsculas y sin tildes, para comparar textos)
+export function normalizar(texto: string) {
+  return texto.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+
+// ¿Son el mismo deporte? Compara las 3 primeras letras: "Fútbol" = "Fútbol 5", "Básquet" = "Baloncesto"
+export function mismoDeporte(a: string, b: string) {
+  let x = normalizar(a).slice(0, 3);
+  let y = normalizar(b).slice(0, 3);
+  if (x === "bal") x = "bas";
+  if (y === "bal") y = "bas";
+  return x === y;
+}
+
+// "2026-08-09T21:00:00.000Z" -> "Domingo, 4:00 pm" (como en la propuesta del chat)
+export function diaYHora(iso: string) {
+  const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  const d = new Date(iso);
+  return dias[d.getDay()] + ", " + horaDeIso(iso).toLowerCase();
+}

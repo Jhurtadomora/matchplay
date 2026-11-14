@@ -48,7 +48,7 @@ export default function LoginPage() {
           <input className="auth-input" type="password" placeholder="••••••••"
             value={contrasena} onChange={(e) => setContrasena(e.target.value)} required />
 
-          <a className="auth-olvido" href="#">¿Olvidaste tu contraseña?</a>
+          <Link className="auth-olvido" href="/recuperar">¿Olvidaste tu contraseña?</Link>
 
           {error && <p className="auth-error">{error}</p>}
 

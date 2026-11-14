@@ -5,15 +5,17 @@ import { useParams, useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import Sidebar from "../../components/Sidebar";
 import { apiFetch, MODO_DEMO, RUTAS } from "../../lib/api";
-import { jugadores } from "../../lib/datos";
+import { jugadores, chats as chatsEjemplo } from "../../lib/datos";
 import { perfilAUi } from "../../lib/adaptadores";
 
 export default function DetalleJugador() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
   const [jugador, setJugador] = useState<any>(null);
+  const [aviso, setAviso] = useState("");
 
   useEffect(() => {
+    setAviso("");
     if (MODO_DEMO) {
       setJugador(jugadores.find((j) => j.id === id));
       return;
@@ -27,6 +29,25 @@ export default function DetalleJugador() {
       setJugador(perfilAUi(perfil, evento));
     });
   }, [id]);
+
+  // Abre el chat con este jugador. El chat existe solo si ya hicieron match.
+  async function enviarMensaje() {
+    setAviso("");
+    if (MODO_DEMO) {
+      const chat = chatsEjemplo.find((c) => c.perfil.id === id);
+      if (chat) router.push("/chat/" + chat.id);
+      else setAviso("Primero deben hacer match para poder chatear");
+      return;
+    }
+    try {
+      const misChats = await apiFetch(RUTAS.chats);
+      const chat = misChats.find((c: any) => c.perfil?.id === id);
+      if (chat) router.push("/chat/" + chat.id);
+      else setAviso("Primero deben hacer match para poder chatear");
+    } catch (err: any) {
+      setAviso(err.message);
+    }
+  }
 
   return (
     <div className="app">
@@ -55,7 +76,8 @@ export default function DetalleJugador() {
               <p>{jugador.descripcion}</p>
             </div>
 
-            <button className="btn-naranja" onClick={() => alert("El chat hace parte de la siguiente entrega")}>
+            {aviso && <p className="aviso-detalle">{aviso}</p>}
+            <button className="btn-naranja" onClick={enviarMensaje}>
               Enviar mensaje
             </button>
           </div>
